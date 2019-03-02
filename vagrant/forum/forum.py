@@ -22,13 +22,22 @@ HTML_WRAP = '''\
                  margin: 10px 20%%; }
       hr.postbound { width: 50%%; }
       em.date { color: #999 }
+      .banana
+      {
+   	color:blue:
+	background:white;
+      }
     </style>
   </head>
   <body>
     <h1>DB Forum</h1>
-    <form method=post>
-      <div><textarea id="content" name="content"></textarea></div>
+    <form method=POST>
+      <div><textarea id="conteudo" name="content"></textarea></div>
       <div><button id="go" type="submit">Post message</button></div>
+    </form>
+    <form method=POST>
+      <div><textarea class="banana" id="conteudo" name="content"></textarea></div>
+      <div><button class="banana" id="go" type="submit">Teste</button></div>
     </form>
     <!-- post content will go here -->
 %s
@@ -46,6 +55,7 @@ POST = '''\
 def main():
   '''Main page of the forum.'''
   posts = "".join(POST % (date, text) for text, date in get_posts())
+  print(posts)
   html = HTML_WRAP % posts
   return html
 
@@ -54,6 +64,9 @@ def main():
 def post():
   '''New post submission.'''
   message = request.form['content']
+  print((message,))
+  print('ENDERECO PARA A MAIN')
+  print(url_for('main'))
   add_post(message)
   return redirect(url_for('main'))
 
